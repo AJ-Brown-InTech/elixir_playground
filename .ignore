@@ -1,0 +1,7 @@
+deps/
+elixir_playground/
+test/
+_build/
+.elixir_ls/
+deps/
+test/
