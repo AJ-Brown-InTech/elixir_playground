@@ -1,9 +1,16 @@
 
 defmodule ElixirPlayground.Runner do
+  @memory_limit "128m"
+  @cpu_limit "0.5"
+  @docker_image "elixir:latest"
+  @timeout 5_000
 
-
-  def run() do
-    
+  def run(code) do
+    with {:ok, tmp_path} <- create_tmp_file(code), {output, status} <- run_in_docker(tmp_path) do
+      File.rm(tmp_path)
+      {output, status}
+    end
+              
   end
 
   defp create_tmp_file(code) do
